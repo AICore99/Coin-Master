@@ -113,6 +113,7 @@
       width: 100px;
       height: auto;
       margin-bottom: 10px;
+      animation: spinPop 2.5s ease-in-out infinite, glowSpin 3s ease-in-out infinite alternate;
     }
     .click-count {
       font-size: 16px;
@@ -145,6 +146,29 @@
       overflow: hidden;
       transition: max-height 0.2s ease-out;
       border-radius: 0 0 10px 10px;
+    }
+    @keyframes spinPop {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.05) rotate(3deg);
+      }
+      100% {
+        transform: scale(1) rotate(-3deg);
+      }
+    }
+      50% {
+        transform: scale(1.05) rotate(3deg);
+      }
+      100% {
+        transform: scale(1) rotate(-3deg);
+      }
+    }
+@keyframes glowSpin {
+      0% { filter: drop-shadow(0 0 5px #ffd700); }
+      50% { filter: drop-shadow(0 0 10px #ffa500); }
+      100% { filter: drop-shadow(0 0 5px #ffd700); }
     }
 </style>
 </head>
