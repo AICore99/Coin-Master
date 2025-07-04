@@ -118,7 +118,35 @@
       font-size: 16px;
       color: #4e2d04;
     }
-  </style>
+      .accordion-btn {
+      background-color: #ffd966;
+      color: #5b3300;
+      cursor: pointer;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 18px;
+      transition: 0.4s;
+      font-family: 'Luckiest Guy', cursive;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+
+    .accordion-btn:hover {
+      background-color: #ff9900;
+    }
+
+    .accordion-panel {
+      padding: 0 18px;
+      background-color: #fff8e1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      border-radius: 0 0 10px 10px;
+    }
+</style>
 </head>
 <body>
 
@@ -127,6 +155,52 @@
 </header>
 
 <div class="content" id="rewards-container"></div>
+
+<div class="content">
+  <iframe width="100%" height="315" src="https://www.youtube.com/embed/wAqI1jCz3xA" title="How to Get Free Spins in Coin Master" frameborder="0" allowfullscreen style="margin-bottom: 30px; border-radius: 12px;"></iframe>
+  <h2>How to get more free spins & coins in Coin Master</h2>
+  <p>Checking here for daily links isn’t the only way that you can get Coin Master free spins and coins! Here are some additional ways you can get Coin Master codes.</p>
+
+  <h3>Invite Facebook friends</h3>
+  <p>Every time you invite a friend on Facebook to play the game, you can get 40 Coin Master free spins. Your friend must accept, install the game, and log into Facebook.</p>
+
+  <h3>Gift each other</h3>
+  <p>You and your friends can gift each other spins and coins daily. This doesn’t cost any of your own spins — you can send and receive 100 spins per day.</p>
+
+  <h3>Wait a bit</h3>
+  <p>You get 5 free spins every hour, up to a total of 50. So if you wait 10 hours, you get the max free spins without doing anything!</p>
+
+  <h2>Coin Master Tips & Tricks</h2>
+  <h3>Don’t hoard your coins!</h3>
+  <p>Spend your coins regularly to avoid losing them during Raids. Hoarding makes you a big target.</p>
+
+  <h3>Big Raids</h3>
+  <p>Use big bets only on players with lots of coins. Equip Foxy to gain an extra shovel and earn more from raids.</p>
+
+  <h3>Buy chests in every village</h3>
+  <p>Always buy chests early to complete card collections. Cards from low-level villages get harder to find later.</p>
+
+  <h3>Don’t waste your pet’s bonuses</h3>
+  <p>Pets only last 4 hours. Only activate one when you know you’ll be playing for a while.</p>
+
+  <h2>Coin Master Free Spins & Coins FAQ</h2>
+<div class="accordion">
+  <button class="accordion-btn">Do Coin Master free spins links expire?</button>
+  <div class="accordion-panel">Yes, usually after 3 days.</div>
+
+  <button class="accordion-btn">How do I get 50 free spins?</button>
+  <div class="accordion-panel">Rare from daily links, more likely during events.</div>
+
+  <button class="accordion-btn">How do I get 60 or 70 free spins?</button>
+  <div class="accordion-panel">These are event-based and rare.</div>
+
+  <button class="accordion-btn">How do I get 100 free spins?</button>
+  <div class="accordion-panel">Earned via raids and event participation.</div>
+
+  <button class="accordion-btn">Can I get 400 or 50,000 spins?</button>
+  <div class="accordion-panel">400 might be possible during big events. 50,000 is not possible but you can earn a lot over time.</div>
+</div>
+</div>
 
 <footer style="text-align: center; padding: 20px; background: #ffe066; font-weight: bold;">
   © 2025 Coin Master Daily | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
@@ -187,6 +261,17 @@
   }
 
   fetchRewards();
+  document.querySelectorAll('.accordion-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      const panel = button.nextElementSibling;
+      button.classList.toggle('active');
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  });
 </script>
 
 </body>
