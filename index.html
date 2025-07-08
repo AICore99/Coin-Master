@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" href="https://coinmaster-daily.com/theme/img/freespins.png" type="image/png">
+  <link rel="icon" href="https://coinmaster-daily.com/theme/img/freespins.png" type="image/png" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coin Master Daily Spins</title>
@@ -76,159 +76,214 @@
       0% { text-shadow: 0 0 5px #ff3300, 0 0 10px #ff3300; }
       100% { text-shadow: 0 0 10px #ff3300, 0 0 20px #ff0000; }
     }
+
     .content {
-      max-width: 800px;
+      max-width: 850px;
       margin: auto;
       padding: 20px;
     }
-    .btn-collect {
-      background: linear-gradient(to right, #ffcd4b, #ff9900);
-      color: #5b3300;
+
+    .reward-day-box {
+      background: #fff2b3;
+      padding: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+    }
+
+    .reward-date {
+      color: #d35400;
+      font-size: 26px;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .new-reward-box {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #fffdf2;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      margin: 10px 0;
+    }
+
+    .new-reward-box img {
+      width: 70px;
+      animation: spinPop 2s infinite ease-in-out;
+    }
+
+    .reward-amount {
+      font-size: 20px;
+      font-weight: bold;
+      color: #c0392b;
+      margin: 5px 0;
+    }
+
+    .new-btn-collect {
+      background: linear-gradient(to right, #f9d423, #ff4e50);
       border: none;
-      padding: 12px 25px;
-      font-size: 18px;
+      padding: 10px 20px;
+      color: white;
+      font-size: 16px;
       border-radius: 30px;
       cursor: pointer;
-      animation: pulse 2s infinite;
-      transition: transform 0.2s;
       font-family: 'Luckiest Guy', cursive;
+      animation: pulse 1.5s infinite;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 4px 10px rgba(255, 78, 80, 0.4);
     }
-    .btn-collect:hover {
-      transform: scale(1.05);
+
+    .new-btn-collect:hover {
+      transform: scale(1.1);
     }
+
+    .new-btn-collect:disabled {
+      background: gray;
+      cursor: default;
+      animation: none;
+    }
+
+    .click-count {
+      font-size: 14px;
+      color: #5c3a00;
+    }
+
+    @keyframes spinPop {
+      0% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.05) rotate(3deg); }
+      100% { transform: scale(1) rotate(-3deg); }
+    }
+
     @keyframes pulse {
       0% { box-shadow: 0 0 0 0 rgba(255,153,0,0.4); }
       70% { box-shadow: 0 0 0 10px rgba(255,153,0,0); }
       100% { box-shadow: 0 0 0 0 rgba(255,153,0,0); }
     }
-    .reward-box {
-      background: #fff8e1;
+
+    /* Tutorial & FAQ styles */
+    #tutorial-faq-container {
+      max-width: 850px;
+      margin: 40px auto 80px auto;
       padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background: #fff9e6;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+      color: #8c2a02;
+      font-size: 16px;
+    }
+
+    #tutorial-faq-container h2 {
+      font-size: 28px;
       margin-bottom: 20px;
       text-align: center;
+      text-shadow: 1px 1px 2px rgba(255, 153, 0, 0.7);
     }
-    .reward-box img {
-      width: 100px;
-      height: auto;
-      margin-bottom: 10px;
-      animation: spinPop 2.5s ease-in-out infinite, glowSpin 3s ease-in-out infinite alternate;
+
+    #tutorial-faq-container ol {
+      padding-left: 20px;
+      line-height: 1.6;
     }
-    .click-count {
-      font-size: 16px;
-      color: #4e2d04;
-    }
-    .accordion-btn {
-      background-color: #ffd966;
-      color: #5b3300;
-      cursor: pointer;
-      padding: 14px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 18px;
-      transition: 0.4s;
-      font-family: 'Luckiest Guy', cursive;
+
+    #tutorial-faq-container dl {
       margin-top: 10px;
-      border-radius: 10px;
+      border-top: 1px solid #f2d680;
+      padding-top: 15px;
     }
-    .accordion-btn:hover {
-      background-color: #ff9900;
+
+    #tutorial-faq-container dt {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #c0392b;
     }
-    .accordion-panel {
-      padding: 0 18px;
-      background-color: #fff8e1;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-      border-radius: 0 0 10px 10px;
+
+    #tutorial-faq-container dd {
+      margin-left: 20px;
+      margin-top: 5px;
+      color: #5c3a00;
+      line-height: 1.4;
     }
-    @keyframes spinPop {
-      0% {
-        transform: scale(1) rotate(0deg);
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 24px;
+        padding: 8px 15px;
       }
-      50% {
-        transform: scale(1.05) rotate(3deg);
+      .reward-date {
+        font-size: 20px;
       }
-      100% {
-        transform: scale(1) rotate(-3deg);
+      .reward-amount {
+        font-size: 18px;
       }
-    }
-    @keyframes glowSpin {
-      0% { filter: drop-shadow(0 0 5px #ffd700); }
-      50% { filter: drop-shadow(0 0 10px #ffa500); }
-      100% { filter: drop-shadow(0 0 5px #ffd700); }
+      .new-reward-box img {
+        width: 50px;
+      }
+      .new-btn-collect {
+        font-size: 14px;
+        padding: 8px 15px;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Custom Ad Banner (Top) -->
-<div style="text-align:center; margin: 10px auto;">
-  <script type="text/javascript">
-    atOptions = {
-      'key' : 'f77bf009f37c1af18a071c4c35824cb8',
-      'format' : 'iframe',
-      'height' : 50,
-      'width' : 320,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="//www.highperformanceformat.com/f77bf009f37c1af18a071c4c35824cb8/invoke.js"></script>
-</div>
+  <!-- Ad Top -->
+  <div style="text-align:center; margin: 10px auto;">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : 'f77bf009f37c1af18a071c4c35824cb8',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/f77bf009f37c1af18a071c4c35824cb8/invoke.js"></script>
+  </div>
 
-<header>
-  <h1><span class="coin-text">Coin</span> <span class="master-text">Master</span> Daily Free Spins</h1>
-</header>
+  <header>
+    <h1><span class="coin-text">Coin</span> <span class="master-text">Master</span> Daily Free Spins</h1>
+  </header>
 
-<div class="content" id="rewards-container"></div>
+  <div class="content" id="rewards-container"></div>
 
-<!-- Custom Ad Banner (After Rewards) -->
-<div style="text-align:center; margin: 30px auto;">
-  <script type="text/javascript">
-    atOptions = {
-      'key' : 'f77bf009f37c1af18a071c4c35824cb8',
-      'format' : 'iframe',
-      'height' : 50,
-      'width' : 320,
-      'params' : {}
-    };
-  </script>
-  <script type="text/javascript" src="//www.highperformanceformat.com/f77bf009f37c1af18a071c4c35824cb8/invoke.js"></script>
-</div>
+  <!-- Tutorial & FAQ Sections -->
+  <div class="content" id="tutorial-faq-container">
+    <section id="tutorial">
+      <h2>🎮 Coin Master Game Tutorial</h2>
+      <ol>
+        <li><strong>Create your village:</strong> Start by spinning the wheel to earn coins and spins.</li>
+        <li><strong>Spin the Wheel:</strong> Use your free spins daily to collect coins, attack other players, or raid their villages.</li>
+        <li><strong>Build and upgrade:</strong> Use coins to build and upgrade your village to progress through levels.</li>
+        <li><strong>Attack and Raid:</strong> Attack other players’ villages or raid their coins to steal rewards.</li>
+        <li><strong>Collect daily rewards:</strong> Use this site’s daily free spins links to get more spins every day!</li>
+        <li><strong>Join events and tournaments:</strong> Participate for extra rewards and rare cards.</li>
+      </ol>
+    </section>
 
-<div class="content">
-  <iframe width="100%" height="315" src="https://www.youtube.com/embed/wAqI1jCz3xA" title="How to Get Free Spins in Coin Master" frameborder="0" allowfullscreen style="margin-bottom: 30px; border-radius: 12px;"></iframe>
-  <h2>How to get more free spins & coins in Coin Master</h2>
-  <p>Checking here for daily links isn’t the only way that you can get Coin Master free spins and coins! Here are some additional ways you can get Coin Master codes.</p>
+    <section id="faq" style="margin-top: 40px;">
+      <h2>❓ Frequently Asked Questions (FAQ)</h2>
+      <dl>
+        <dt><strong>Q1: How do I use the free spins links?</strong></dt>
+        <dd>A1: Click the “Collect Now” button next to each daily reward to open the link in a new tab and claim your free spins.</dd>
 
-  <h3>Invite Facebook friends</h3>
-  <p>Every time you invite a friend on Facebook to play the game, you can get 40 Coin Master free spins. Your friend must accept, install the game, and log into Facebook.</p>
+        <dt><strong>Q2: Are these free spins safe to use?</strong></dt>
+        <dd>A2: Yes, these links are provided from official or trusted sources and updated daily.</dd>
 
-  <h3>Gift each other</h3>
-  <p>You and your friends can gift each other spins and coins daily. This doesn’t cost any of your own spins — you can send and receive 100 spins per day.</p>
+        <dt><strong>Q3: Can I collect spins for multiple days?</strong></dt>
+        <dd>A3: Yes, you can collect the spins shown for each date independently.</dd>
 
-  <h3>Wait a bit</h3>
-  <p>You get 5 free spins every hour, up to a total of 50. So if you wait 10 hours, you get the max free spins without doing anything!</p>
+        <dt><strong>Q4: Why don’t I see rewards for today?</strong></dt>
+        <dd>A4: Sometimes the rewards may be updated later in the day, please check back regularly.</dd>
 
-  <h2>Coin Master Tips & Tricks</h2>
-  <h3>Don’t hoard your coins!</h3>
-  <p>Spend your coins regularly to avoid losing them during Raids. Hoarding makes you a big target.</p>
+        <dt><strong>Q5: How do I get more coins?</strong></dt>
+        <dd>A5: Play the game regularly, participate in raids and events, and use daily spin rewards to maximize coins.</dd>
+      </dl>
+    </section>
+  </div>
 
-  <h3>Big Raids</h3>
-  <p>Use big bets only on players with lots of coins. Equip Foxy to gain an extra shovel and earn more from raids.</p>
-
-  <h3>Buy chests in every village</h3>
-  <p>Always buy chests early to complete card collections. Cards from low-level villages get harder to find later.</p>
-
-  <h3>Don’t waste your pet’s bonuses</h3>
-  <p>Pets only last 4 hours. Only activate one when you know you’ll be playing for a while.</p>
-
-  <h2>Coin Master Free Spins & Coins FAQ</h2>
-
-  <!-- Custom Ad Banner (FAQ section) -->
+  <!-- Ad Bottom -->
   <div style="text-align:center; margin: 30px auto;">
     <script type="text/javascript">
       atOptions = {
@@ -242,92 +297,119 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/f77bf009f37c1af18a071c4c35824cb8/invoke.js"></script>
   </div>
 
-  <div class="accordion">
-    <button class="accordion-btn">Do Coin Master free spins links expire?</button>
-    <div class="accordion-panel">Yes, usually after 3 days.</div>
+  <footer style="text-align: center; padding: 20px; background: #ffe066; font-weight: bold;">
+    © 2025 Coin Master Daily | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
+  </footer>
 
-    <button class="accordion-btn">How do I get 50 free spins?</button>
-    <div class="accordion-panel">Rare from daily links, more likely during events.</div>
+  <script>
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAE2rRszevuopG8T0NP_gFnAq-jTwlw4Fbq53QNe5AWSdmJTmyEAgi1nV2pJN6LHqz3QePiIL13Gul/pub?output=csv';
 
-    <button class="accordion-btn">How do I get 60 or 70 free spins?</button>
-    <div class="accordion-panel">These are event-based and rare.</div>
-
-    <button class="accordion-btn">How do I get 100 free spins?</button>
-    <div class="accordion-panel">Earned via raids and event participation.</div>
-
-    <button class="accordion-btn">Can I get 400 or 50,000 spins?</button>
-    <div class="accordion-panel">400 might be possible during big events. 50,000 is not possible but you can earn a lot over time.</div>
-  </div>
-</div>
-
-<footer style="text-align: center; padding: 20px; background: #ffe066; font-weight: bold;">
-  © 2025 Coin Master Daily | <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
-</footer>
-
-<script>
-  const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAE2rRszevuopG8T0NP_gFnAq-jTwlw4Fbq53QNe5AWSdmJTmyEAgi1nV2pJN6LHqz3QePiIL13Gul/pub?output=csv';
-
-  async function fetchRewards() {
-    const res = await fetch(sheetUrl);
-    const text = await res.text();
-    const rows = text.split('\n').slice(1);
-    const rewards = rows.map(row => {
-      const [spins, date, link] = row.split(',');
-      return { spins: parseInt(spins), date: date.trim(), link: link.trim() };
-    });
-    renderRewards(rewards);
-  }
-
-  function renderRewards(rewards) {
-    rewards.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const container = document.getElementById('rewards-container');
-    container.innerHTML = '';
-    rewards.forEach(reward => {
-      const box = document.createElement('div');
-      box.className = 'reward-box';
-      box.innerHTML = `
-        <img src="https://coinmaster-daily.com/theme/img/freespins.png" alt="${reward.spins} spins" />
-        <h2>${reward.spins} Spins</h2>
-        <p>Updated: ${new Date(reward.date).toLocaleDateString()}</p>
-        <button class="btn-collect" onclick="handleCollect(this, '${reward.link}')">Collect</button>
-        <p class="click-count">Clicked: not yet</p>
-      `;
-      container.appendChild(box);
-    });
-  }
-
-  function handleCollect(button, url) {
-    window.open(url, '_blank', 'noopener,noreferrer');
-    const parent = button.closest('.reward-box');
-    const clickDisplay = parent.querySelector('.click-count');
-    const now = new Date();
-    const timeStr = now.getFullYear() + "-" +
-                    String(now.getMonth() + 1).padStart(2, '0') + "-" +
-                    String(now.getDate()).padStart(2, '0') + " " +
-                    String(now.getHours()).padStart(2, '0') + ":" +
-                    String(now.getMinutes()).padStart(2, '0') + ":" +
-                    String(now.getSeconds()).padStart(2, '0');
-    clickDisplay.textContent = `Clicked at: ${timeStr}`;
-    button.textContent = "Collected";
-    button.disabled = true;
-    button.style.background = "#aaa";
-    button.style.cursor = "default";
-  }
-
-  fetchRewards();
-  document.querySelectorAll('.accordion-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      const panel = button.nextElementSibling;
-      button.classList.toggle('active');
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+    async function fetchRewards() {
+      try {
+        const res = await fetch(sheetUrl);
+        if (!res.ok) throw new Error("Fetch failed");
+        const text = await res.text();
+        const rows = text.split('\n').slice(1).filter(r => r.trim() !== '');
+        const rewards = rows.map(row => {
+          const cols = row.split(',');
+          if (cols.length < 3) return null;
+          const spins = parseInt(cols[0]);
+          const date = cols[1].trim();
+          const link = cols[2].trim();
+          return { spins, date, link };
+        }).filter(r => r !== null);
+        renderRewards(rewards);
+      } catch (e) {
+        document.getElementById('rewards-container').innerHTML = "<p style='text-align:center;'>Unable to load rewards. Please try again later.</p>";
       }
-    });
-  });
-</script>
-<script type='text/javascript' src='//pl27099326.profitableratecpm.com/a9/6d/40/a96d40e2346b8e81135462c44f3b94c2.js'></script>
+    }
+
+    function renderRewards(rewards) {
+      const container = document.getElementById('rewards-container');
+      container.innerHTML = '';
+
+      const grouped = {};
+
+      // Helper to get readable date label
+      function getDateLabel(dateStr) {
+        const rewardDate = new Date(dateStr);
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(today.getDate() - 1);
+
+        // Zero time for comparison
+        function zeroTime(d) {
+          return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+        }
+
+        const rewardZero = zeroTime(rewardDate).getTime();
+        const todayZero = zeroTime(today).getTime();
+        const yesterdayZero = zeroTime(yesterday).getTime();
+
+        if (rewardZero === todayZero) return "Today";
+        if (rewardZero === yesterdayZero) return "Yesterday";
+
+        // Else show normal localized date string
+        return rewardDate.toLocaleDateString();
+      }
+
+      rewards.forEach(reward => {
+        const dateLabel = getDateLabel(reward.date);
+        if (!grouped[dateLabel]) grouped[dateLabel] = [];
+        grouped[dateLabel].push(reward);
+      });
+
+      // Sort keys with Today first, Yesterday second, then descending dates
+      const keys = Object.keys(grouped);
+      keys.sort((a, b) => {
+        if (a === "Today") return -1;
+        if (b === "Today") return 1;
+        if (a === "Yesterday") return -1;
+        if (b === "Yesterday") return 1;
+        return new Date(b) - new Date(a);
+      });
+
+      keys.forEach(dateLabel => {
+        const dayBox = document.createElement('div');
+        dayBox.className = 'reward-day-box';
+
+        let dayHTML = `<h2 class="reward-date">${dateLabel}</h2>`;
+        grouped[dateLabel].forEach(reward => {
+          dayHTML += `
+            <div class="new-reward-box">
+              <img src="https://coinmaster-daily.com/theme/img/freespins.png" alt="${reward.spins} spins" />
+              <div>
+                <p class="reward-amount">${reward.spins} Free Spins</p>
+                <button class="new-btn-collect" onclick="handleCollect(this, '${reward.link}')">🎁 Collect Now</button>
+                <p class="click-count">Not clicked</p>
+              </div>
+            </div>
+          `;
+        });
+
+        dayBox.innerHTML = dayHTML;
+        container.appendChild(dayBox);
+      });
+    }
+
+    function handleCollect(button, url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+      const parent = button.closest('.new-reward-box');
+      const clickDisplay = parent.querySelector('.click-count');
+      const now = new Date();
+      const timeStr = now.getFullYear() + "-" +
+                      String(now.getMonth() + 1).padStart(2, '0') + "-" +
+                      String(now.getDate()).padStart(2, '0') + " " +
+                      String(now.getHours()).padStart(2, '0') + ":" +
+                      String(now.getMinutes()).padStart(2, '0') + ":" +
+                      String(now.getSeconds()).padStart(2, '0');
+      clickDisplay.textContent = `Clicked at: ${timeStr}`;
+      button.textContent = "✅ Collected";
+      button.disabled = true;
+    }
+
+    fetchRewards();
+  </script>
+  <script type='text/javascript' src='//pl27099326.profitableratecpm.com/a9/6d/40/a96d40e2346b8e81135462c44f3b94c2.js'></script>
 </body>
-  
 </html>
