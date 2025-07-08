@@ -162,6 +162,56 @@
       100% { box-shadow: 0 0 0 0 rgba(255,153,0,0); }
     }
 
+    /* Load More Button Styles */
+    #load-more-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    #load-more-btn {
+        background: #f9d423;
+        border: none;
+        padding: 12px 25px;
+        color: #8c2a02;
+        font-size: 18px;
+        border-radius: 30px;
+        cursor: pointer;
+        font-family: 'Luckiest Guy', cursive;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(249, 212, 35, 0.4);
+        /* Add new animation */
+        animation: loadMoreGlow 2s infinite alternate;
+    }
+
+    #load-more-btn:hover {
+        transform: scale(1.05);
+        background: #ffcc00;
+        /* More pronounced shadow on hover */
+        box-shadow: 0 8px 15px rgba(249, 212, 35, 0.6);
+    }
+
+    #load-more-btn:active {
+        /* Press down effect */
+        transform: translateY(2px) scale(1.03);
+        box-shadow: 0 2px 5px rgba(249, 212, 35, 0.4);
+    }
+
+    #load-more-btn:disabled {
+        background: #cccccc;
+        cursor: default;
+        box-shadow: none;
+        color: #666666;
+        /* Stop animation when disabled */
+        animation: none;
+    }
+
+    /* New Keyframes for Load More Button Glow */
+    @keyframes loadMoreGlow {
+        0% { box-shadow: 0 4px 10px rgba(249, 212, 35, 0.4); }
+        100% { box-shadow: 0 4px 15px rgba(249, 212, 35, 0.8), 0 0 5px rgba(255, 204, 0, 0.6); }
+    }
+
+
     /* Tutorial & FAQ styles */
     #tutorial-faq-container {
       max-width: 850px;
@@ -223,12 +273,15 @@
         font-size: 14px;
         padding: 8px 15px;
       }
+      #load-more-btn {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Ad Top -->
   <div style="text-align:center; margin: 10px auto;">
     <script type="text/javascript">
       atOptions = {
@@ -247,15 +300,18 @@
   </header>
 
   <div class="content" id="rewards-container"></div>
+  <div id="load-more-container" class="content" style="display: none;">
+    <button id="load-more-btn">Load More Old Rewards</button>
+  </div>
 
-  <!-- Tutorial & FAQ Sections -->
+
   <div class="content" id="tutorial-faq-container">
     <section id="tutorial">
       <h2>🎮 Coin Master Game Tutorial</h2>
       <ol>
         <li><strong>Create your village:</strong> Start by spinning the wheel to earn coins and spins.</li>
         <li><strong>Spin the Wheel:</strong> Use your free spins daily to collect coins, attack other players, or raid their villages.</li>
-        <li><strong>Build and upgrade:</strong> Use coins to build and upgrade your village to progress through levels.</li>
+        <li><strong>Build and upgrade:</b> Use coins to build and upgrade your village to progress through levels.</li>
         <li><strong>Attack and Raid:</strong> Attack other players’ villages or raid their coins to steal rewards.</li>
         <li><strong>Collect daily rewards:</strong> Use this site’s daily free spins links to get more spins every day!</li>
         <li><strong>Join events and tournaments:</strong> Participate for extra rewards and rare cards.</li>
@@ -283,7 +339,6 @@
     </section>
   </div>
 
-  <!-- Ad Bottom -->
   <div style="text-align:center; margin: 30px auto;">
     <script type="text/javascript">
       atOptions = {
@@ -303,6 +358,9 @@
 
   <script>
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAE2rRszevuopG8T0NP_gFnAq-jTwlw4Fbq53QNe5AWSdmJTmyEAgi1nV2pJN6LHqz3QePiIL13Gul/pub?output=csv';
+    let allRewards = []; // Store all fetched rewards
+    let displayedRewardCount = 0; // Track how many older rewards are displayed
+    const rewardsPerLoad = 2; // How many reward days to load at a time after the initial 3 days
 
     async function fetchRewards() {
       try {
@@ -310,7 +368,7 @@
         if (!res.ok) throw new Error("Fetch failed");
         const text = await res.text();
         const rows = text.split('\n').slice(1).filter(r => r.trim() !== '');
-        const rewards = rows.map(row => {
+        allRewards = rows.map(row => {
           const cols = row.split(',');
           if (cols.length < 3) return null;
           const spins = parseInt(cols[0]);
@@ -318,54 +376,63 @@
           const link = cols[2].trim();
           return { spins, date, link };
         }).filter(r => r !== null);
-        renderRewards(rewards);
+
+        // Sort rewards by date in descending order (latest first)
+        allRewards.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        renderInitialRewards();
       } catch (e) {
         document.getElementById('rewards-container').innerHTML = "<p style='text-align:center;'>Unable to load rewards. Please try again later.</p>";
       }
     }
 
-    function renderRewards(rewards) {
-      const container = document.getElementById('rewards-container');
-      container.innerHTML = '';
+    function getDateLabel(dateStr) {
+      const rewardDate = new Date(dateStr);
+      const today = new Date();
+      const yesterday = new Date();
+      yesterday.setDate(today.getDate() - 1);
+      const twoDaysAgo = new Date();
+      twoDaysAgo.setDate(today.getDate() - 2);
 
-      const grouped = {};
-
-      // Helper to get readable date label
-      function getDateLabel(dateStr) {
-        const rewardDate = new Date(dateStr);
-        const today = new Date();
-        const yesterday = new Date();
-        yesterday.setDate(today.getDate() - 1);
-
-        // Zero time for comparison
-        function zeroTime(d) {
-          return new Date(d.getFullYear(), d.getMonth(), d.getDate());
-        }
-
-        const rewardZero = zeroTime(rewardDate).getTime();
-        const todayZero = zeroTime(today).getTime();
-        const yesterdayZero = zeroTime(yesterday).getTime();
-
-        if (rewardZero === todayZero) return "Today";
-        if (rewardZero === yesterdayZero) return "Yesterday";
-
-        // Else show normal localized date string
-        return rewardDate.toLocaleDateString();
+      // Zero time for comparison
+      function zeroTime(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate());
       }
 
+      const rewardZero = zeroTime(rewardDate).getTime();
+      const todayZero = zeroTime(today).getTime();
+      const yesterdayZero = zeroTime(yesterday).getTime();
+      const twoDaysAgoZero = zeroTime(twoDaysAgo).getTime();
+
+      if (rewardZero === todayZero) return "Today";
+      if (rewardZero === yesterdayZero) return "Yesterday";
+      if (rewardZero === twoDaysAgoZero) return "Two Days Ago";
+
+      // Else show normal localized date string
+      return rewardDate.toLocaleDateString();
+    }
+
+    function groupRewardsByDate(rewards) {
+      const grouped = {};
       rewards.forEach(reward => {
         const dateLabel = getDateLabel(reward.date);
         if (!grouped[dateLabel]) grouped[dateLabel] = [];
         grouped[dateLabel].push(reward);
       });
+      return grouped;
+    }
 
-      // Sort keys with Today first, Yesterday second, then descending dates
+    function renderRewards(rewardsToRender) {
+      const container = document.getElementById('rewards-container');
+      const grouped = groupRewardsByDate(rewardsToRender);
+
+      // Sort keys with Today first, Yesterday second, Two Days Ago third, then descending dates
       const keys = Object.keys(grouped);
       keys.sort((a, b) => {
-        if (a === "Today") return -1;
-        if (b === "Today") return 1;
-        if (a === "Yesterday") return -1;
-        if (b === "Yesterday") return 1;
+        const order = { "Today": 0, "Yesterday": 1, "Two Days Ago": 2 };
+        if (order[a] !== undefined && order[b] !== undefined) return order[a] - order[b];
+        if (order[a] !== undefined) return -1;
+        if (order[b] !== undefined) return 1;
         return new Date(b) - new Date(a);
       });
 
@@ -387,10 +454,74 @@
           `;
         });
 
-        dayBox.innerHTML = dayHTML;
         container.appendChild(dayBox);
+        dayBox.innerHTML = dayHTML;
       });
     }
+
+    function renderInitialRewards() {
+      const container = document.getElementById('rewards-container');
+      container.innerHTML = ''; // Clear existing content
+
+      // Get unique dates from allRewards
+      const uniqueDates = [...new Set(allRewards.map(reward => reward.date))].sort((a, b) => new Date(b) - new Date(a));
+
+      const latestThreeDays = uniqueDates.slice(0, 3);
+      const initialRewards = allRewards.filter(reward => latestThreeDays.includes(reward.date));
+
+      renderRewards(initialRewards);
+
+      // Prepare older rewards for "Load More"
+      const olderRewardsDates = uniqueDates.slice(3);
+      const olderRewards = allRewards.filter(reward => olderRewardsDates.includes(reward.date));
+
+      if (olderRewards.length > 0) {
+        document.getElementById('load-more-container').style.display = 'block';
+        window.remainingOlderRewards = olderRewards;
+        displayedRewardCount = 0; // Reset counter for older rewards
+        updateLoadMoreButton();
+      } else {
+        document.getElementById('load-more-container').style.display = 'none';
+      }
+    }
+
+    function loadMoreRewards() {
+        const container = document.getElementById('rewards-container');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+
+        // Group remaining older rewards by date
+        const groupedOlderRewards = groupRewardsByDate(window.remainingOlderRewards);
+        const olderKeys = Object.keys(groupedOlderRewards).sort((a, b) => new Date(b) - new Date(a)); // Ensure descending order
+
+        const rewardsToDisplay = [];
+        let datesAdded = 0;
+
+        for (let i = displayedRewardCount; i < olderKeys.length && datesAdded < rewardsPerLoad; i++) {
+            const dateKey = olderKeys[i];
+            rewardsToDisplay.push(...groupedOlderRewards[dateKey]);
+            datesAdded++;
+        }
+
+        renderRewards(rewardsToDisplay); // Append new rewards
+
+        displayedRewardCount += datesAdded;
+        updateLoadMoreButton();
+    }
+
+    function updateLoadMoreButton() {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const groupedOlderRewards = groupRewardsByDate(window.remainingOlderRewards);
+        const olderKeys = Object.keys(groupedOlderRewards).length;
+
+        if (displayedRewardCount >= olderKeys) {
+            loadMoreBtn.textContent = "No More Old Rewards";
+            loadMoreBtn.disabled = true;
+        } else {
+            loadMoreBtn.textContent = "Load More Old Rewards";
+            loadMoreBtn.disabled = false;
+        }
+    }
+
 
     function handleCollect(button, url) {
       window.open(url, '_blank', 'noopener,noreferrer');
@@ -408,7 +539,15 @@
       button.disabled = true;
     }
 
-    fetchRewards();
+    // Attach load more button listener
+    document.addEventListener('DOMContentLoaded', () => {
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', loadMoreRewards);
+        }
+        fetchRewards();
+    });
+
   </script>
   <script type='text/javascript' src='//pl27099326.profitableratecpm.com/a9/6d/40/a96d40e2346b8e81135462c44f3b94c2.js'></script>
 </body>
